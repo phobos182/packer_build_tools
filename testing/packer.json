@@ -3,7 +3,6 @@
         "instance_type": "{{env `INSTANCE_TYPE`}}",
         "tests": "{{env `TESTS`}}",
         "ami": "{{env `AMI`}}",
-        "role": "{{env `ROLE`}}",
         "ec2_access_key": "{{env `EC2_ACCESS_KEY`}}",
         "ec2_secret_key": "{{env `EC2_SECRET_KEY`}}",
         "region": "{{env `REGION`}}",
