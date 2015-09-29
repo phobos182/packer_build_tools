@@ -1,0 +1,4 @@
+source 'https://rubygems.org'
+gem 'serverspec', '~>2.7'
+gem 'rake'
+gem 'yarjuf'

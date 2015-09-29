@@ -1,0 +1,32 @@
+require 'rake'
+require 'rspec/core/rake_task'
+
+task :spec => 'spec:all'
+
+namespace :spec do
+
+  targets = []
+  Dir.glob('./spec/*').each do |dir|
+    next unless File.directory?(dir)
+    targets << File.basename(dir)
+  end
+
+  task :all     => targets
+  task :default => :all
+
+  if(ENV['TARGET_HOST'].nil?)
+      host = 'localhost'
+  else
+      host = ENV['TARGET_HOST']
+  end
+
+  targets.each do |target|
+    desc "Run ServerSpec tests for #{target} on #{host}"
+    RSpec::Core::RakeTask.new(target.to_sym) do |t|
+      ENV['TARGET_HOST'] = host
+      t.rspec_opts = %w[-f JUnit -o serverspec.xml]
+      t.pattern = "spec/#{target}/*_spec.rb"
+    end
+  end
+
+end

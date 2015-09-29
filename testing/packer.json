@@ -1,0 +1,52 @@
+{
+    "variables": {
+        "instance_type": "{{env `INSTANCE_TYPE`}}",
+        "tests": "{{env `TESTS`}}",
+        "ami": "{{env `AMI`}}",
+        "role": "{{env `ROLE`}}",
+        "ec2_access_key": "{{env `EC2_ACCESS_KEY`}}",
+        "ec2_secret_key": "{{env `EC2_SECRET_KEY`}}",
+        "region": "{{env `REGION`}}",
+        "account_id": "{{env `ACCOUNT_ID`}}",
+        "s3_bucket": "{{env `S3_BUCKET`}}",
+        "security_group": "{{env `SECURITY_GROUP`}}",
+        "ec2_cert": "{{env `EC2_CERT`}}"
+    },
+    "provisioners": [
+        {
+            "source": "tests",
+            "destination": "/tmp",
+            "type": "file"
+        },
+        {
+            "environment_vars": [
+                "TESTS={{user `tests`}}"
+            ],
+            "type": "shell",
+            "scripts": [
+                "run_tests.sh"
+            ]
+        }
+    ],
+    "builders": [
+        {
+            "type": "amazon-instance",
+            "account_id": "{{user `account_id`}}",
+            "ami_name": "validation",
+            "instance_type": "{{user `instance_type`}}",
+            "region": "{{user `region`}}",
+            "s3_bucket": "{{user `s3_bucket`}}",
+            "secret_key": "{{user `ec2_secret_key`}}",
+            "access_key": "{{user `ec2_access_key`}}",
+            "source_ami": "{{user `ami`}}",
+            "ssh_username": "root",
+            "ssh_port": 22,
+            "x509_cert_path": "null",
+            "x509_key_path": "null",
+            "user_data": "#cloud-config\ndisable_root: false\nuser: root",
+            "security_group_id": "{{user `security_group`}}",
+            "bundle_vol_command": "/bin/true",
+            "bundle_upload_command": "/bin/true"
+        }
+    ]
+}
