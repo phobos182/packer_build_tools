@@ -13,7 +13,7 @@ _DEFAULT_APP = 'base'
 _DEFAULT_ARCH = 'x86_64'
 _DEFAULT_INSTANCE_TYPE = 'ebs'
 _DEFAULT_VIRTUALIZATION = 'hvm'
-_DEFAULT_RELEASE = 'precise'
+_DEFAULT_RELEASE = 'trusty'
 
 # setup logging
 log = logging.getLogger(__name__)
