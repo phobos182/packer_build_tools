@@ -8,3 +8,4 @@ uci_locator
 =============
 
 * Find Ubuntu Cloud Images
+* Example: AMI_ID=$(python ./uci_locator.py)
