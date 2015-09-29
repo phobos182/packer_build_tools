@@ -40,7 +40,16 @@ def filter_images(boto_ec2, filters):
 
 
 def create_image_filter(environment, application, release, instance_type, virtualization, architecture):
-    """ Return dictionary representing a image filter. """
+    """
+    Return dictionary representing a image filter
+    :param environment: The environment to search for. Example: test, prod, dev
+    :param application: The name of the application ami to search for
+    :param release: the release / codename of the image. Ex: precise, trusty
+    :param instance_type: The instance type of the root volume. Ex: ebs, instance-store, ebs-ssd, ebs-io1
+    :param virtualization: The virtualization type. Ex: hvm, paravirtual
+    :param architecture: The architecture of the image. Ex: i386, x86_64
+    :return: a dict() representing a filter to apply to the boto get_all_images() call
+    """
     image_filter = {'tag:environment': '{}'.format(environment),
                     'tag:application': '{}'.format(application),
                     'tag:release': '{}'.format(release),
